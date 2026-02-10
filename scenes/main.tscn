@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/bird.tscn" id="2_bird"]
+[ext_resource type="PackedScene" path="res://scenes/ground.tscn" id="3_ground"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_score"]
+font_size = 48
+font_color = Color(1, 1, 1, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_msg"]
+font_size = 24
+font_color = Color(1, 1, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 288
+offset_bottom = 512
+color = Color(0.31, 0.74, 0.87, 1)
+
+[node name="CloudsLayer" type="Node2D" parent="."]
+
+[node name="Cloud1" type="ColorRect" parent="CloudsLayer"]
+offset_left = 30
+offset_top = 60
+offset_right = 90
+offset_bottom = 80
+color = Color(1, 1, 1, 0.5)
+
+[node name="Cloud2" type="ColorRect" parent="CloudsLayer"]
+offset_left = 150
+offset_top = 100
+offset_right = 230
+offset_bottom = 125
+color = Color(1, 1, 1, 0.4)
+
+[node name="Cloud3" type="ColorRect" parent="CloudsLayer"]
+offset_left = 60
+offset_top = 160
+offset_right = 120
+offset_bottom = 178
+color = Color(1, 1, 1, 0.35)
+
+[node name="Pipes" type="Node2D" parent="."]
+
+[node name="Bird" parent="." instance=ExtResource("2_bird")]
+position = Vector2(72, 256)
+
+[node name="Ground" parent="." instance=ExtResource("3_ground")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_left = 0
+offset_top = 30
+offset_right = 288
+offset_bottom = 80
+horizontal_alignment = 1
+vertical_alignment = 0
+text = "0"
+label_settings = SubResource("LabelSettings_score")
+
+[node name="MessageLabel" type="Label" parent="UI"]
+offset_left = 0
+offset_top = 180
+offset_right = 288
+offset_bottom = 280
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Tap to Start"
+label_settings = SubResource("LabelSettings_msg")
+
+[connection signal="died" from="Bird" to="." method="_on_bird_died"]
