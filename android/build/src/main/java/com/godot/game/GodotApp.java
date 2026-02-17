@@ -39,6 +39,10 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.core.splashscreen.SplashScreen;
 
+import android.content.pm.ActivityInfo;
+
+import android.content.pm.ActivityInfo;
+
 /**
  * Template activity for Godot Android builds.
  * Feel free to extend and modify this class for your custom logic.
@@ -70,24 +74,30 @@ public class GodotApp extends GodotActivity {
 		SplashScreen.installSplashScreen(this);
 		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		updateWindowAppearance.run();
 	}
 
 	@Override
 	public void onGodotMainLoopStarted() {
 		super.onGodotMainLoopStarted();
-		runOnUiThread(updateWindowAppearance);
+		runOnUiThread(() -> {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			updateWindowAppearance.run();
+		});
 	}
 
 	@Override
 	public void onGodotForceQuit(Godot instance) {
 		if (!BuildConfig.FLAVOR.equals("instrumented")) {
-			// For instrumented builds, we disable force-quitting to allow the instrumented tests to complete
+			// For instrumented builds, we disable force-quitting to allow the instrumented
+			// tests to complete
 			// successfully, otherwise they fail when the process crashes.
 			super.onGodotForceQuit(instance);
 		}
