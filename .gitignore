@@ -1,2 +1,28 @@
 /run
 /.godot/
+/scratch/
+
+# Android export template (keep android/build/ but ignore its output)
+android/build/build/
+android/build/.gradle/
+android/build/local.properties
+android/build/**/out/
+
+# Ignore generated assets inside android/build (these are copies of project files)
+android/build/src/*/assets/*
+!android/build/src/*/assets/.gitkeep
+
+# Ignore generated resources (optional, but good for cleanliness)
+# The `godot_project_name_string.xml` files are regenerated on export.
+# However, modifying `res/values/strings.xml` or `styles.xml` is common for custom builds.
+# For now, let's keep `res/` but ignore `bin/` or `gen/` if they existed (they don't in Gradle structure).
+
+# Ignore .godot folders recursively (inside android/ too)
+.godot/
+android/build/**/.godot/
+
+# Build artifacts
+/build/
+*.apk
+*.aab
+export.log
