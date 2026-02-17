@@ -19,8 +19,12 @@ func _draw() -> void:
 	var grass_color := Color(0.33, 0.72, 0.19, 1)
 	var half_h: float = GROUND_HEIGHT / 2.0
 
+	var extra_depth := 1000.0 # Extend well below screen
+
 	# Draw 4 tiles to guarantee full screen coverage at any scroll position
 	for i in range(-1, 3):
 		var x: float = i * TILE_WIDTH - scroll_offset - 144.0
-		draw_rect(Rect2(x, -half_h, TILE_WIDTH, GROUND_HEIGHT), ground_color)
+		# Draw dirt extending down
+		draw_rect(Rect2(x, -half_h, TILE_WIDTH, GROUND_HEIGHT + extra_depth), ground_color)
+		# Draw grass on top
 		draw_rect(Rect2(x, -half_h, TILE_WIDTH, GRASS_HEIGHT), grass_color)
