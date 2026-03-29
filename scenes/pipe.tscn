@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/pipe.gd" id="1_pipe"]
 
@@ -7,6 +7,9 @@ size = Vector2(52, 320)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bottom"]
 size = Vector2(52, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cap"]
+size = Vector2(60, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_score"]
 size = Vector2(10, 120)
@@ -36,6 +39,10 @@ color = Color(0.14, 0.55, 0.08, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
 shape = SubResource("RectangleShape2D_top")
 
+[node name="CapCollision" type="CollisionShape2D" parent="TopPipe"]
+position = Vector2(0, 158)
+shape = SubResource("RectangleShape2D_cap")
+
 [node name="BottomPipe" type="StaticBody2D" parent="."]
 position = Vector2(0, 220)
 collision_layer = 2
@@ -57,6 +64,10 @@ color = Color(0.14, 0.55, 0.08, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
 shape = SubResource("RectangleShape2D_bottom")
+
+[node name="CapCollision" type="CollisionShape2D" parent="BottomPipe"]
+position = Vector2(0, -158)
+shape = SubResource("RectangleShape2D_cap")
 
 [node name="ScoreZone" type="Area2D" parent="."]
 collision_layer = 4

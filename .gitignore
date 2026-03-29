@@ -7,6 +7,7 @@ android/build/build/
 android/build/.gradle/
 android/build/local.properties
 android/build/**/out/
+android/build/libs/
 
 # Ignore generated assets inside android/build (these are copies of project files)
 android/build/src/*/assets/*
